@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:text=""
+        android:textSize="1dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="23dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="17dp"
+        android:id="@+id/textView8"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView8"
+        android:layout_alignStart="@+id/textView8"
+        android:layout_below="@+id/textView8"
+        android:layout_marginTop="20dp"
+        android:text="Request Item"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="20dp" />
+
+    <TextView
+        android:text="From:"
+        android:textSize="18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:layout_marginTop="12dp"
+        android:id="@+id/textView17"
+        android:layout_below="@+id/type"
+        android:layout_alignLeft="@+id/textView6"
+        android:layout_alignStart="@+id/textView6" />
+
+    <TextView
+        android:text="To:"
+        android:textSize="18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:layout_marginTop="14dp"
+        android:id="@+id/textView18"
+        android:layout_below="@+id/textView17"
+        android:layout_alignLeft="@+id/textView17"
+        android:layout_alignStart="@+id/textView17" />
+
+    <TextView
+        android:text="TextView"
+        android:textSize="18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:id="@+id/category_from"
+        android:layout_alignBaseline="@+id/textView17"
+        android:layout_alignBottom="@+id/textView17"
+        android:layout_alignLeft="@+id/type"
+        android:layout_alignStart="@+id/type" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.0dp"
+        android:background="@android:color/darker_gray"
+        android:id="@+id/view"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/request"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView18"
+        android:layout_alignStart="@+id/textView18"
+        android:layout_below="@+id/textView18"
+        android:layout_marginTop="15dp"
+        android:text="Make Request" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/request"
+        android:layout_toRightOf="@+id/textView8"
+        android:layout_toEndOf="@+id/textView8"
+        android:id="@+id/textView9" />
+
+    <TextView
+        android:id="@+id/item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView6"
+        android:layout_alignStart="@+id/textView6"
+        android:layout_alignTop="@+id/type"
+        android:text="QWERTY"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="18dp" />
+
+    <View
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="15dp"
+        android:id="@+id/type"
+        android:layout_below="@+id/textView6"
+        android:layout_toRightOf="@+id/request"
+        android:layout_alignRight="@+id/bar"
+        android:layout_alignEnd="@+id/bar" />
+
+    <TextView
+        android:text="TextView"
+        android:textSize="18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:id="@+id/category_to"
+        android:layout_above="@+id/request"
+        android:layout_alignLeft="@+id/category_from"
+        android:layout_alignStart="@+id/category_from" />
+
+</RelativeLayout>
