@@ -148,4 +148,15 @@ public class DBHandler extends SQLiteOpenHelper {
             return 0;
         }
     }
+
+    public int countURL(){
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "SELECT * FROM " + ITEMS_TABLE + " WHERE " + SNO + " = 'URL'";
+        Cursor cursor = db.rawQuery(query,null);
+        if(cursor.getCount() > 0){
+            return cursor.getCount();
+        } else{
+            return 0;
+        }
+    }
 }

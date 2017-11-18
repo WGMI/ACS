@@ -1,24 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView2"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:id="@+id/welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="105dp"
-        android:text="Home" />
+        android:layout_marginTop="66dp"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@android:color/background_light"
+        android:gravity="center"
+        android:textSize="30dp" />
 
-    <Button
-        android:id="@+id/button"
+    <TextView
+        android:id="@+id/requests"
+        android:textSize="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="48dp"
-        android:text="Button" />
+        android:layout_marginTop="42dp"
+        android:text="TextView"
+        android:textColor="@android:color/background_light"
+        android:gravity="center"
+        android:layout_below="@+id/welcome"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/borrowed"
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_marginTop="38dp"
+        android:textColor="@android:color/background_light"
+        android:gravity="center"
+        android:layout_below="@+id/requests"
+        android:layout_alignLeft="@+id/requests"
+        android:layout_alignStart="@+id/requests" />
+
+    <TextView
+        android:id="@+id/held"
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="41dp"
+        android:text="TextView"
+        android:textColor="@android:color/background_light"
+        android:gravity="center"
+        android:layout_below="@+id/borrowed"
+        android:layout_alignLeft="@+id/requests"
+        android:layout_alignStart="@+id/requests" />
+
+    <TextView
+        android:id="@+id/late"
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/held"
+        android:layout_alignStart="@+id/held"
+        android:layout_below="@+id/held"
+        android:textColor="@android:color/background_light"
+        android:gravity="center"
+        android:layout_marginTop="38dp"
+        android:text="TextView" />
+
 </RelativeLayout>

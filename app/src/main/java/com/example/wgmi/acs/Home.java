@@ -95,6 +95,9 @@ public class Home extends AppCompatActivity
             case R.id.nav_scan:
                 fragment = new ScanFragment();
                 break;
+            case R.id.logout:
+                fragment = new LogoutFragment();
+                break;
         }
 
         if(fragment != null){

@@ -20,9 +20,10 @@ public class SetURL extends AppCompatActivity {
         setContentView(R.layout.activity_set_url);
 
         handler = new DBHandler(this);
-        handler.deleteItem("URL");
 
         url = (EditText) findViewById(R.id.url);
+        //url.setText(handler.getItem("URL").getName());
+        handler.deleteItem("URL");
         Button set = (Button) findViewById(R.id.set);
 
         set.setOnClickListener(new View.OnClickListener() {
@@ -30,8 +31,19 @@ public class SetURL extends AppCompatActivity {
             public void onClick(View v) {
                 urlString = url.getText().toString();
                 handler.addItem(new Item("URL",urlString,"","","",0,0));
+                Intent intent = new Intent(SetURL.this,Login.class);
+                startActivity(intent);
+            }
+        });
+
+        set.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                urlString = url.getText().toString();
+                handler.addItem(new Item("URL",urlString,"","","",0,0));
                 Intent intent = new Intent(SetURL.this,Home.class);
                 startActivity(intent);
+                return true;
             }
         });
     }

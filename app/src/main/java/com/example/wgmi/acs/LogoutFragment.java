@@ -15,27 +15,37 @@ import android.view.ViewGroup;
  * Created by WGMI on 03/11/2017.
  */
 
-public class ScanFragment extends Fragment {
+public class LogoutFragment extends Fragment {
 
     Context context;
+    DBHandler handler;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.scan,container,false);
+        View view = inflater.inflate(R.layout.fragment_logout,container,false);
 
         context = getActivity();
-        /*AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setMessage("Use this device's camera to scan a QR or barcode?")
-                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+        handler = new DBHandler(context);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Sign Out");
+        builder.setMessage("Are you sure you want to sign out?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(context,CodeScanner.class));
+                        handler.deleteItem("USR");
+                        startActivity(new Intent(context,Login.class));
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(context,Home.class));
                     }
                 })
                 .create()
                 .show();
-        */
         return view;
     }
 

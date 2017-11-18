@@ -195,7 +195,7 @@ public class ViewItem extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         RequestQueue queue = Volley.newRequestQueue(ViewItem.this);
-                        String url = "http://"+urlString+"/acs/android_request.php";
+                        String url = "http://"+urlString+"/acs/android/request.php";
                         StringRequest request = new StringRequest(
                                 Request.Method.POST,
                                 url,
@@ -213,8 +213,12 @@ public class ViewItem extends AppCompatActivity {
                             protected Map<String,String> getParams() throws AuthFailureError {
                                 Map<String,String> params = new HashMap<>();
                                 params.put("android","1");
-                                params.put("from",String.valueOf(fromDateSelected));
-                                params.put("to",String.valueOf(toDateSelected));
+                                params.put("id",serial);
+                                params.put("userid",handler.getItem("USR").getName());
+                                params.put("from",dt_f);
+                                params.put("to",dt_t);
+                                //params.put("from",String.valueOf(fromDateSelected));
+                                //params.put("to",String.valueOf(toDateSelected));
                                 return params;
                             }
                         };
