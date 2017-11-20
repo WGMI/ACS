@@ -25,7 +25,7 @@ public class ScanFragment extends Fragment {
         View view = inflater.inflate(R.layout.scan,container,false);
 
         context = getActivity();
-        /*AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage("Use this device's camera to scan a QR or barcode?")
                 .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                     @Override
@@ -35,7 +35,6 @@ public class ScanFragment extends Fragment {
                 })
                 .create()
                 .show();
-        */
         return view;
     }
 
