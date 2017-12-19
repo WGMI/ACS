@@ -3,6 +3,7 @@ package com.example.wgmi.acs;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -36,6 +37,7 @@ public class ViewItem extends AppCompatActivity {
     DBHandler handler;
     Context context;
     Button borrow;
+    Button home;
 
     Calendar calendar = Calendar.getInstance();
     Date date = new Date();
@@ -66,6 +68,7 @@ public class ViewItem extends AppCompatActivity {
         handler = new DBHandler(this);
         urlString = handler.getItem("URL").getName();
         borrow = (Button)findViewById(R.id.borrow);
+        home = (Button)findViewById(R.id.home);
 
         sno.setText(serial);
         name.setText(bundle.getString("name"));
@@ -225,6 +228,13 @@ public class ViewItem extends AppCompatActivity {
                         queue.add(request);
                     }
                 });
+            }
+        });
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(context,Home.class));
             }
         });
     }

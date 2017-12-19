@@ -1,5 +1,6 @@
 package com.example.wgmi.acs;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -12,7 +13,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.zxing.Result;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 import static android.Manifest.permission.CAMERA;
 
@@ -20,11 +35,19 @@ public class CodeScanner extends AppCompatActivity implements ZXingScannerView.R
 
     private static final int REQUEST_CAMERA = 1;
     private ZXingScannerView mScannerView;
+    Context context;
+    DBHandler handler;
+    String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_code_scanner);
+
+        context = this;
+        handler = new DBHandler(context);
+        String urlString = handler.getItem("URL").getName();
+        url = "http://"+urlString+"/acs/android/scan.php";
 
         mScannerView = new ZXingScannerView(this);
         setContentView(mScannerView);
@@ -55,7 +78,7 @@ public class CodeScanner extends AppCompatActivity implements ZXingScannerView.R
                     if (cameraAccepted){
                         Toast.makeText(getApplicationContext(), "Permission Granted, Now you can access camera", Toast.LENGTH_LONG).show();
                     }else {
-                        Toast.makeText(getApplicationContext(), "Permission Denied, You cannot access and camera", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Permission Denied, You cannot access the camera", Toast.LENGTH_LONG).show();
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                             if (shouldShowRequestPermissionRationale(CAMERA)) {
                                 showMessageOKCancel("You need to allow access to both the permissions",
@@ -120,7 +143,7 @@ public class CodeScanner extends AppCompatActivity implements ZXingScannerView.R
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Scan Result");
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Back", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mScannerView.resumeCameraPreview(CodeScanner.this);
@@ -133,13 +156,48 @@ public class CodeScanner extends AppCompatActivity implements ZXingScannerView.R
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(result));
                 startActivity(browserIntent);
                 */
-                Intent intent = new Intent(CodeScanner.this,Test.class);
-                intent.putExtra("sno",result);
-                startActivity(intent);
+                findItem(result);
             }
         });
         builder.setMessage(rawResult.getText());
         AlertDialog alert1 = builder.create();
         alert1.show();
+    }
+
+    public void findItem(final String result){
+        url += "?id=" + result;
+        RequestQueue queue = Volley.newRequestQueue(context);
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject object = new JSONObject(response);
+                            Intent intent = new Intent(CodeScanner.this, ViewItem.class);
+                            Bundle b = new Bundle();
+                            b.putString("sno", object.getString("serial_no"));
+                            b.putString("category", object.getString("category_id"));
+                            b.putString("name", object.getString("name"));
+                            b.putString("specifications", object.getString("specifications"));
+                            b.putString("status", object.getString("status"));
+                            b.putString("available", object.getString("available"));
+                            b.putString("image", object.getString("image"));
+                            intent.putExtras(b);
+                            startActivity(intent);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context,"Please check internet connection. " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        queue.add(request);
     }
 }

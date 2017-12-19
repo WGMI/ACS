@@ -80,7 +80,7 @@ public class HomeFragment extends Fragment {
                             requests.setText(requestNum + "\nRequests");
                             borrowed.setText(borrowedNum + "\nItems\nBorrowed");
                             held.setText(heldNum + "\nItems Held");
-                            late.setText(requestNum + "\nItems Late");
+                            late.setText(lateNum + "\nItems Late");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
